@@ -1,0 +1,71 @@
+\RequirePackage[l2tabu,orthodox]{nag}
+% TODO: decide if one-sided/two-sided
+\def\DevnagVersion{2.15}
+% After preprocess
+
+%\documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook} % two-sided
+\documentclass[footsepline,footinclude=false,oneside,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc]{report} % one-sided
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+\usepackage[noenc]{tipa}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+%Required for mikTeX
+\usepackage{devanagari}
+
+%\usepackage[utf8]{inputenc}
+
+%\font\dev = "AkrutiDev2" at 11pt
+
+%Improvement to raise chi
+\newcommand{\goodchi}{\protect\raisebox{2pt}{$\chi$}}
+
+\DeclareMathOperator{\X}{\mathbb{X}}
+\DeclareMathOperator{\Y}{\mathbb{Y}}
+\DeclareMathOperator{\Ui}{\mathbb{U}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+% !TeX root = ../main.tex
+% Add the above to each chapter to make compiling the PDF easier in some editors.
+\begin{document}
+
+\newcommand{\dev}{\dn}{1}
+
+\chapter{Observability}\label{chapter:Observability}
+
+\section{Nonlinear dynamic systems}
+From the theory of dynamic systems, we know that a time-varying system {\dev{s}} (/\textit{{\textipa{"s}}}/, {\small{\texttt{Devanagari}}}) can be modeled as a state-space representation as follows,\\
+\begin{equation}
+\text{\dev{s}}:
+	\left\{
+		\begin{array}{lr}
+		 \dot{x}(t)=f(t,x(t),u(t))\\		 
+		 y(t) = h(x(t),u(t))
+		\end{array}
+	\right.
+\end{equation}
+
+We assume that in the system {\dev{s}}, $x(t) \in \X$, $y(t) \in \Y$ and $u(t) \in \Ui$, with $\X$ and $\Y$ being sufficiently continuously differentiable manifolds of dimensions $n$ and $p$ respectively, where $f:\X \times \Ui \xrightarrow{} \X$, $h:\X \xrightarrow{} \Y$, the state-space $\X = \R^n$ and the observation space, $\Y = \R^p$. The differentiability of $\Y$ is significant in the observability study of system {\dev{s}} as will be derived later. 
+
+In typical control systems, it is realistically not possible to measure all the states of the corresponding dynamic model given by (1.1). So, an observer is usually employed whose dynamics are computed as the system {\dev{s\?}} (/\textit{{\textipa{"se:}}}/, {\small{\texttt{Devanagari}}}),
+\begin{equation}
+\text{{{\dev{s\?}}}}:
+	\left\{
+		\begin{array}{lr}
+		 \dot{\hat{x}}(t)=f(t,\hat{x},u(t))\\		 
+		 y(t) = h(\hat{x},u(t))
+		\end{array}
+	\right.
+\end{equation}
+
+As is evident from (1.2), the system {\dev{s\?}} assumes the same input controls and output observations as that of the original system given in (1.1) but is different in that, it characterizes the true dynamic system with the observed states $\hat{x}$. 
+
+
+\end{document}
